@@ -1,0 +1,12 @@
+{
+  "name": "vivo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "selenium-webdriver": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/selenium-webdriver": "^4.1.22"
+  }
+}
