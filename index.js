@@ -1,26 +1,8 @@
-const WebDriver = require("selenium-webdriver");
-const seleniumFirefox = require("selenium-webdriver/firefox");
-
-const firefoxOptions = new seleniumFirefox.Options();
-firefoxOptions.setBinary("/snap/firefox/current/usr/lib/firefox/firefox");
-
-const IP = "192.168.15.1";
-const user = "admin";
-const pass = "SENHA_AQUI";
-
-function mess_userpass(str) {
-  return str
-    .split("")
-    .map(function (c) {
-      return String.fromCharCode(c.charCodeAt(0) ^ 0x1f);
-    })
-    .join("");
-}
-const userMessed = mess_userpass(user);
-const passMessed = mess_userpass(pass);
+const Utils = require("./utils");
+const Vars = require("./vars");
 
 async function getFreshSessionId() {
-  const any = await fetch(`http://${IP}/login.asp`);
+  const any = await fetch(`http://${Vars.IP}/login.asp`);
   const cookies = any.headers.getSetCookie();
 
   const cookiesObj = {};
@@ -44,10 +26,10 @@ async function doLogin() {
   );
 
   const urlencoded = new URLSearchParams();
-  urlencoded.append("loginUsername", userMessed);
-  urlencoded.append("loginPassword", passMessed);
+  urlencoded.append("loginUsername", Vars.user);
+  urlencoded.append("loginPassword", Vars.pass);
 
-  await fetch(`http://${IP}/cgi-bin/te_acceso_router.cgi`, {
+  await fetch(`http://${Vars.IP}/cgi-bin/te_acceso_router.cgi`, {
     method: "POST",
     body: urlencoded,
     headers,
@@ -57,18 +39,20 @@ async function doLogin() {
 }
 
 (async function () {
-  const sessionId = await doLogin();
-  let driver = new WebDriver.Builder()
-    .forBrowser(WebDriver.Browser.FIREFOX)
-    .setFirefoxOptions(firefoxOptions)
-    .build();
+  if (Utils.getPlatform() !== "win32" && Utils.getPlatform() !== "linux") {
+    console.error("O script só pode ser executado em Windows ou Linux.");
+    process.exit(1);
+  }
 
-  await driver.get(`http://${IP}/login.asp`);
+  const sessionId = await doLogin();
+  const driver = Utils.getWebDriver();
+
+  await driver.get(`http://${Vars.IP}/login.asp`);
   await driver.manage().addCookie({ name: "SessionID", value: sessionId });
   await driver.manage().addCookie({ name: "LoginRole", value: "system" });
   await driver
     .manage()
     .addCookie({ name: "_httpdSessionId_", value: sessionId, httpOnly: true });
 
-  driver.navigate().to(`http://${IP}/avanzada.asp`);
+  driver.navigate().to(`http://${Vars.IP}/avanzada.asp`);
 })();
