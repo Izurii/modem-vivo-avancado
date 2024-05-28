@@ -1,10 +1,9 @@
-Trocar o "SENHA_AQUI" pela senha do usuário admin
+No arquivos `vars.js`:
 
-Trocar o IP "192.168.15.1" pelo seu
-
-Instalar os pacotes do node
-
-E rodar o index.js: "node index.js"
+- Trocar o "SENHA_AQUI" pela senha do usuário admin
+- Trocar o IP "192.168.15.1" pelo seu
+- Instalar os pacotes do node (npm install ou yarn)
+- E rodar o index.js: "node index.js"
 
 O negócio vai fazer as requisições necessárias para pegar o ID da sessão, autenticar essa sessão com seu usuário e senha, e abrir um firefox controlado pelo selenium e te jogar para a página de configuraçoes avançadas.
 
