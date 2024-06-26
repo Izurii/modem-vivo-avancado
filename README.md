@@ -1,13 +1,27 @@
-No arquivos `vars.js`:
+No arquivos vars.js:
 
 - Trocar o "SENHA_AQUI" pela senha do usuário admin
 - Trocar o IP "192.168.15.1" pelo seu
 - Instalar os pacotes do node (npm install ou yarn)
 - E rodar o index.js: "node index.js"
+---
+
+--> Caso você não seja familiarizado com Node em Windows.
+
+No arquivos `vars.js`:
+- Trocar o "SENHA_AQUI" pela senha do usuário admin
+- Trocar o IP "192.168.15.1" pelo seu gateway
+
+Instalar
+
+- Instalar os pacotes do [node](https://nodejs.org/en/download/prebuilt-installer) caso não tenha instlado
+
+Executar
+- Abrir o CMD como administrador e rodar o index.js utilizando o node: "node index.js"
+---
 
 O negócio vai fazer as requisições necessárias para pegar o ID da sessão, autenticar essa sessão com seu usuário e senha, e abrir um firefox/chrome controlado pelo selenium e te jogar para a página de configuraçoes avançadas.
 
----
 
 Essa gambiarra de script deveria funcionar para ambos linux e windows desde que:
 
