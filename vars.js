@@ -14,6 +14,10 @@ const browserPaths = {
 	linux: {
 		firefox: "/snap/firefox/current/usr/lib/firefox/firefox",
 		chrome: "/usr/bin/google-chrome",
+	},
+	darwin: {
+			firefox: "/Applications/Firefox.app/Contents/MacOS/firefox",
+			chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --kiosk"
 	}
 };
 

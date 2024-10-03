@@ -40,8 +40,8 @@ async function doLogin() {
 
 (async function () {
 	const platform = Utils.getPlatform();
-	if (platform !== "win32" && platform !== "linux") {
-		console.error("O script só pode ser executado em Windows ou Linux.");
+	if (platform !== "win32" && platform !== "linux" && platform != "darwin") {
+		console.error("Plataforma não suportada. Esse script suporta apenas Linux, Windows e MacOS");
 		process.exit(1);
 	}
 
